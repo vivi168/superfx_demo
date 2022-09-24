@@ -5,26 +5,28 @@
 .base 7fb0
 
 ; zero bytes
-    .db 00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+    .db 00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+; chipset subtype
+    .db 00
 ; game title "SUPER FX DEMO        "
     .db 53,55,50,45,52,20,46,58,20,44,45,4d,4f,20,20,20,20,20,20,20,20
-; map mode
+; 0xffd5: map mode
     .db 30
-; cartridge type
-    .db 00
-; ROM size
+; 0xffd6: cartridge type
+    .db 15
+; 0xffd7: ROM size
     .db 09
-; RAM size
+; 0xffd8: RAM size
     .db 01
-; destination code
+; 0xffd9: destination code
     .db 00
-; fixed value
+; 0xffda: fixed value
     .db 33
-; mask ROM version
+; 0xffdb: mask ROM version
     .db 00
-; checksum complement
+; 0xffdc: checksum complement
     .db 00,00
-; checksum
+; 0xffde: checksum
     .db 00,00
 
 ;**************************************

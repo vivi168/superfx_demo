@@ -19,6 +19,9 @@
 .include level.asm
 .include object.asm
 
+InitGSU:
+    rts
+
 MainLoop:
     jsr @WaitNextVBlank
 
