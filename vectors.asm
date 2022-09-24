@@ -122,3 +122,12 @@ FastNmi:
     pla
     plp
     rti
+
+
+IRQVector:
+    jmp !FastIRQ
+FastIRQ:
+    ; read GSU status register bit 15
+    ; if 1 -> irq was from GSU
+    jmp @MainLoop ; find way to return to correct place
+    rti

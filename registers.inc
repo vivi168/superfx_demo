@@ -211,3 +211,14 @@
 .define     A2A7L           4378    ; DMA7 HDMA Table Address, lower byte
 .define     A2A7H           4379    ; DMA7 HDMA Table Address, higher byte
 .define     NTRL7           437A    ; DMA7 HDMA Line-Counter
+; -------------
+;   GSU Registers (CPU side)
+; -------------
+.define PBR  3034
+.define CFGR 3037
+.define SCBR 3038
+.define CLSR 3039
+.define SCMR 303A
+
+.define R15L 301E
+.define R15H 301F

@@ -38,12 +38,12 @@
 ; zero bytes
     .db 00,00,00,00
 ; 65816 mode
-    .db 00,00           ; COP
-    .db @BreakVector    ; BRK
+    .db 00,00           ; COP ffe4
+    .db @BreakVector    ; BRK ffe6
     .db 00,00
-    .db @NmiVector      ; NMI
+    .db @NmiVector      ; NMI ffea -> 0108
     .db 00,00
-    .db 00,00           ; IRQ
+    .db @IRQVector      ; IRQ ffee -> 010c
 
 ; zero bytes
     .db 00,00,00,00

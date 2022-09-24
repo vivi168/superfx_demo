@@ -1,3 +1,15 @@
+.org 700000
+
+issou: .rb 1
+
+.org 701000
+
+gsu_base_prg: .rb 1
+
+.org 702000
+
+screen_base: .rb 1
+
 .org 7e0000
 
 joy1_raw:                 .rb 2
