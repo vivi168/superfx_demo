@@ -1,0 +1,10 @@
+#!/bin/bash
+
+ruby -I../SNES_Utils/lib ../SNES_Utils/bin/vas -f superfx/main.asm -o superfx/gsu.bin
+
+gsu_rom_size=$(echo "puts \"#{File.size('superfx/gsu.bin').to_s(16).rjust(4, '0')}\"" | ruby)
+sed -i "s/\(GSU_ROM_SIZE\).*$/\1 $gsu_rom_size/" define.inc
+
+ruby -I../SNES_Utils/lib ../SNES_Utils/bin/vas -f main.asm -o superfx_demo.sfc
+
+cp superfx_demo.sfc /mnt/c/Users/vbihl/Documents/SNES/
