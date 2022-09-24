@@ -59,6 +59,8 @@ copy_gsu_prog_loop:
     .call M8
     rts
 
+MainEntry:
+    jsr @InitGSU
 MainLoop:
     jsr @WaitNextVBlank
 

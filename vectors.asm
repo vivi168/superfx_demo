@@ -53,8 +53,6 @@ FastReset:
     jsr @ClearBG1Buffer
     jsr @InitOamBuffer
 
-    jsr @InitGSU
-
 ;  ---- DMA Transfers
 
     .call VRAM_DMA_TRANSFER 0000, bg1_tiles, BG1_TILES_SIZE
@@ -75,7 +73,7 @@ FastReset:
     sta NMITIMEN
     cli
 
-    jmp @MainLoop
+    jmp @MainEntry
 
 BreakVector:
     rti
