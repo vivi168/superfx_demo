@@ -129,5 +129,15 @@ IRQVector:
 FastIRQ:
     ; read GSU status register bit 15
     ; if 1 -> irq was from GSU
-    jmp @MainLoop ; find way to return to correct place
+
+    lda SFRH
+    bit #80
+    bne @return_from_gsu
+
+    bra @exit_irq
+
+return_from_gsu:
+    ; specific code here
+
+exit_irq:
     rti

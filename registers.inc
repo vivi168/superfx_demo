@@ -214,6 +214,8 @@
 ; -------------
 ;   GSU Registers (CPU side)
 ; -------------
+.define SFRL 3030
+.define SFRH 3031
 .define PBR  3034
 .define CFGR 3037
 .define SCBR 3038

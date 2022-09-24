@@ -22,8 +22,6 @@
 InitGSU:
     jsr @CopyGSUProg
 
-    brk 00
-
     lda #70 ; set pbr to bank 70 (GSU RAM)
     sta PBR ; Program bank register
 
