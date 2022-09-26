@@ -53,6 +53,17 @@ FastReset:
     .call WRAM_DMA_TRANSFER 01, @FastNmi, FastNmi_ROM, {FastNmi_end-FastNmi}w
     .call WRAM_DMA_TRANSFER 01, @FastIRQ, FastIRQ_ROM, {FastIRQ_end-FastIRQ}w
     .call WRAM_DMA_TRANSFER 01, @InitGSU, InitGSU_ROM, {InitGSU_end-InitGSU}w
+
+    ldx @NmiVector
+    stx @nmi_dummy_jump
+    ldx @NmiVector+2
+    stx @nmi_dummy_jump+2
+    ldx @IRQVector
+    stx @irq_dummy_jump
+    ldx @IRQVector+2
+    stx @irq_dummy_jump+2
+
+
     jsr @ClearBG1Buffer
     jsr @InitOamBuffer
 

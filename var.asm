@@ -26,7 +26,7 @@ next_rand:                .rb 2
 .org 7e0108
 
 nmi_dummy_jump:           .rb 4
-irq_dummy_jump:           .rb 2
+irq_dummy_jump:           .rb 4
 
 .org 7e2000
 

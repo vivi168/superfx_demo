@@ -13,7 +13,7 @@
 ; 0xffd5: map mode
     .db 30
 ; 0xffd6: cartridge type
-    .db 15 ; starfox is 13 ?
+    .db 13 ; starfox is 13 ?
 ; 0xffd7: ROM size
     .db 09
 ; 0xffd8: RAM size
@@ -41,9 +41,11 @@
     .db 00,00           ; COP ffe4
     .db @BreakVector    ; BRK ffe6
     .db 00,00
-    .db @NmiVector      ; NMI ffea -> 0108
+    ; .db @NmiVector      ; NMI ffea -> 0108
+    .db @nmi_dummy_jump      ; NMI ffea -> 0108
     .db 00,00
-    .db @IRQVector      ; IRQ ffee -> 010c
+    ; .db @IRQVector      ; IRQ ffee -> 010c
+    .db @irq_dummy_jump      ; NMI ffea -> 0108
 
 ; zero bytes
     .db 00,00,00,00

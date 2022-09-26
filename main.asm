@@ -23,7 +23,6 @@
 .include object.asm
 
 InitGSU_ROM:
-    brk 00
     ; phb needed ?
     lda #02 ; set pbr to bank 02 (GSU ROM)
     sta PBR ; Program bank register
@@ -41,7 +40,7 @@ InitGSU_ROM:
     lda #01
     sta CLSR ; clock select register
 
-    ldx #8000
+    ldx #0000
     stx R15L
 
 wait_for_gsu:
