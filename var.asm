@@ -29,3 +29,9 @@ bg_buffers:
 bg1_buffer:               .rb 800
 oam_buffer:               .rb 200
 oam_buffer_hi:            .rb 20
+
+.org 7f0000
+
+FastNmi: .rb {FastNmi_ROM_end-FastNmi_ROM}
+FastIRQ: .rb {FastIRQ_ROM_end-FastIRQ_ROM}
+FastIRQ_end:

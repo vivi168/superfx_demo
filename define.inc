@@ -10,5 +10,3 @@
 ; OAM
 .define OAML_SIZE   0200
 .define OAM_SIZE    0220
-
-.define GSU_ROM_SIZE 0080

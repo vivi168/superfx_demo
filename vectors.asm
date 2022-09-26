@@ -50,6 +50,7 @@ FastReset:
     sta OBJSEL          ; oam start @VRAM[8000]
 
 ;  ---- Some initialization
+    .call WRAM_DMA_TRANSFER 01, @FastNmi, FastNmi_ROM, {FastIRQ_end-FastNmi}w
     jsr @ClearBG1Buffer
     jsr @InitOamBuffer
 
@@ -88,7 +89,7 @@ wait_next_vblank:
 
 NmiVector:
     jmp !FastNmi
-FastNmi:
+FastNmi_ROM:
     php
     .call MX16
     pha
@@ -108,9 +109,9 @@ FastNmi:
     sta BG1HOFS
 
     .call VRAM_DMA_TRANSFER 2800, bg1_buffer, BG1_BUFFER_SIZE
-    jsr @TransferOamBuffer
+    ; jsr @TransferOamBuffer ; should relocate this to RAM as well
 
-    jsr @ReadJoyPad1
+    ; jsr @ReadJoyPad1 ; should relocate this to RAM as well
 
     inc @vblank_disable
 
@@ -120,11 +121,11 @@ FastNmi:
     pla
     plp
     rti
-
+FastNmi_ROM_end:
 
 IRQVector:
     jmp !FastIRQ
-FastIRQ:
+FastIRQ_ROM:
     ; read GSU status register bit 15
     ; if 1 -> irq was from GSU
 
@@ -139,3 +140,4 @@ return_from_gsu:
 
 exit_irq:
     rti
+FastIRQ_ROM_end:

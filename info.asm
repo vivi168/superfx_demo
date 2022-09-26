@@ -13,7 +13,7 @@
 ; 0xffd5: map mode
     .db 30
 ; 0xffd6: cartridge type
-    .db 15
+    .db 15 ; starfox is 13 ?
 ; 0xffd7: ROM size
     .db 09
 ; 0xffd8: RAM size
