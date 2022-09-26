@@ -1,3 +1,7 @@
+.org 028000
+.base 10000
+
+
 .superfx
 
 entry:
@@ -6,12 +10,13 @@ entry:
     ; add r1
     ; nop
 
-    ; ibt r1,#01
-    ; from r1
-    ; romb
-    ; iwt r14,#0000
-    ; to r2
-    ; getb ; movb Rd,[romb:r14]    ;hi=zero-expanded ; need ROM access
+    ibt r1,#00
+    from r1
+    romb
+    iwt r14,#0000
+    to r2
+    getb ; movb Rd,[romb:r14]    ;hi=zero-expanded ; need ROM access
+    ;;
 
     ibt r0,#00 ; 000_00001
     cmode

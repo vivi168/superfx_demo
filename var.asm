@@ -23,6 +23,11 @@ horizontal_offset:        .rb 2
 
 next_rand:                .rb 2
 
+.org 7e0108
+
+nmi_dummy_jump:           .rb 4
+irq_dummy_jump:           .rb 2
+
 .org 7e2000
 
 bg_buffers:
@@ -33,5 +38,8 @@ oam_buffer_hi:            .rb 20
 .org 7f0000
 
 FastNmi: .rb {FastNmi_ROM_end-FastNmi_ROM}
+FastNmi_end:
 FastIRQ: .rb {FastIRQ_ROM_end-FastIRQ_ROM}
 FastIRQ_end:
+InitGSU: .rb {InitGSU_ROM_end-InitGSU_ROM}
+InitGSU_end:
