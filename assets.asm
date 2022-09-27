@@ -3,7 +3,6 @@
 
 null_byte: .db 00
 
-bg1_tiles:     .incbin assets/bg1.tiles
 bg2_tiles:     .incbin assets/bg2.tiles
 
 bg1_pal:       .incbin assets/bg1.pal

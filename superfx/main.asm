@@ -42,7 +42,9 @@ GSU_clear_buffer:
     nop
 
 
-
+; todo -> argument
+; x0, y0 -> length
+; color
 GSU_Plot_line:
     ;; test plotting
 
@@ -51,7 +53,7 @@ GSU_Plot_line:
     cmode
 
     ; then set COLOR (color, getc)
-    ibt r0,#07
+    ibt r0,#0b
     color
 
     ; then set x, y (r1, r2)

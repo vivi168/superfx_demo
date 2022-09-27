@@ -1,7 +1,6 @@
 .define STACK_TOP 1fff
 
 ; assets
-.define BG1_TILES_SIZE      01a0
 .define BG1_SCBR_SIZE_HALF  3000
 .define BG1_SCBR_SIZE       6000
 .define BG2_TILES_SIZE      02e0

@@ -61,7 +61,6 @@ FastReset:
 
 ;  ---- DMA Transfers
 
-    .call VRAM_DMA_TRANSFER 0000, bg1_tiles, BG1_TILES_SIZE
     .call VRAM_DMA_TRANSFER 3000, bg2_tiles, BG2_TILES_SIZE           ; VRAM[0x2000] (word step)
 
     ; should design a tilemap corresponding to tiles drawn by super FX
@@ -118,10 +117,8 @@ FastNmi_ROM:
     ; find way to transfer full buffer during NMI
     ; split transfer over multiple frame.
     ; .call VRAM_DMA_TRANSFER 0000, screen_base, 1780
-    ; .call VRAM_DMA_TRANSFER 0000, bg1_tiles, BG1_TILES_SIZE
-    ; .call VRAM_DMA_TRANSFER 2800, bg1_buffer, BG1_BUFFER_SIZE
-    ; jsr @TransferOamBuffer ; should relocate this to RAM as well
 
+    ; jsr @TransferOamBuffer ; should relocate this to RAM as well
     ; jsr @ReadJoyPad1 ; should relocate this to RAM as well
 
     inc @vblank_disable
