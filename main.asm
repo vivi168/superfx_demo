@@ -27,7 +27,7 @@ InitGSU_ROM:
     lda #02 ; set pbr to bank 02 (GSU ROM)
     sta PBR ; Program bank register
 
-    lda #04
+    lda #04 ; gsu/2
     sta VCR
 
     stz RAMBR
@@ -68,6 +68,9 @@ MainEntry:
     jsl !CallGSUFunction
 
     ldx #@GSU_clear_buffer
+    jsl !CallGSUFunction
+
+    ldx #@GSU_Plot_line
     jsl !CallGSUFunction
 MainLoop:
     jsr @WaitNextVBlank

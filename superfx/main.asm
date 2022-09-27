@@ -30,10 +30,10 @@ GSU_entry:
 GSU_clear_buffer:
     iwt r0,#0
     cmode
-    iwt r1,#2000  ; scbr
-    iwt r12,#1800 ; 192 * 256 // 8
+    iwt r1,#@screen_base  ; scbr
+    iwt r12,#1800 ; 192 * 256 // 8 ; loop counter
     cache
-    move r13,r15
+    move r13,r15 ; loop to here (r13 = loop to, r15 = PC)
     stw (r1)
     inc r1
     loop
@@ -41,52 +41,31 @@ GSU_clear_buffer:
     stop
     nop
 
+
+
+GSU_Plot_line:
     ;; test plotting
+
     ; first set CMODE
+    iwt r0,#01 ; 000_00001
+    cmode
+
     ; then set COLOR (color, getc)
+    ibt r0,#07
+    color
+
     ; then set x, y (r1, r2)
     ; then plot
 
-            ;     iwt r0,#0001 ; 000_00001
-            ;     cmode
+    iwt r1,#0
+    iwt r2,#4
 
-            ;     ibt r0,#07
-            ;     color
+    iwt r12,#80
 
+    cache
+    move r13,r15
+    loop
+    plot
 
-            ;     iwt r1,#0000
-            ;     iwt r2,#0000
-            ;     plot
-            ;     plot
-            ;     plot
-            ;     plot
-
-            ;     plot
-            ;     plot
-            ;     plot
-            ;     plot
-
-            ;     ibt r0,#02
-            ;     color
-
-
-            ;     iwt r12,#80
-            ;     iwt r1,#0000
-            ;     iwt r2,#0001
-
-            ; issourire:
-            ;     plot
-            ;     plot
-            ;     plot
-            ;     plot
-
-            ;     plot
-            ;     plot
-            ;     plot
-
-            ;     plot
-            ;     inc r2
-            ;     iwt r1,#0000
-            ;     iwt r13,#{issourire}
-            ;     loop
-            ;     nop
+    stop
+    nop
