@@ -1,19 +1,3 @@
-ClearBG1Buffer:
-    .call M16
-
-    ldx #0000
-    lda #0000
-clear_buffer_loop:
-    sta !bg1_buffer,x
-    inx
-    inx
-    cpx #0800
-    bne @clear_buffer_loop
-
-    .call M8
-    rts
-
-
 ; Xorshift algorithm
 Random:
 	lda @next_rand+1

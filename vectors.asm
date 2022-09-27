@@ -57,8 +57,6 @@ FastReset:
     ldx @IRQVector+2
     stx @irq_dummy_jump+2
 
-
-    jsr @ClearBG1Buffer
     jsr @InitOamBuffer
 
 ;  ---- DMA Transfers
@@ -67,20 +65,20 @@ FastReset:
     .call VRAM_DMA_TRANSFER 3000, bg2_tiles, BG2_TILES_SIZE           ; VRAM[0x2000] (word step)
 
     ; should design a tilemap corresponding to tiles drawn by super FX
-    .call VRAM_DMA_TRANSFER 5800, bg1_buffer, BG1_BUFFER_SIZE         ; VRAM[0xb000] (word step)
+    .call VRAM_DMA_TRANSFER 5800, bg1_map, BG1_MAP_SIZE               ; VRAM[0xb000] (word step)
     .call VRAM_DMA_TRANSFER 6000, bg2_map, BG2_MAP_SIZE               ; VRAM[0xc000] (word step)
 
     .call CGRAM_DMA_TRANSFER 00, bg1_pal, 80
 
     jsr @TransferOamBuffer
 
-; ---- Release Forced Blank
-    lda #0f             ; release forced blanking, set screen to full brightness
-    sta INIDISP
+; ; ---- Release Forced Blank
+;     lda #0f             ; release forced blanking, set screen to full brightness
+;     sta INIDISP
 
-    lda #81             ; enable NMI, turn on automatic joypad polling
-    sta NMITIMEN
-    cli
+;     lda #81             ; enable NMI, turn on automatic joypad polling
+;     sta NMITIMEN
+;     cli
 
     jmp @MainEntry
 
@@ -117,6 +115,9 @@ FastNmi_ROM:
     sta BG1HOFS
 
     ; copy char data from 70:2000 to bg1_tile tiles VRAM[0000]
+    ; find way to transfer full buffer during NMI
+    ; split transfer over multiple frame.
+    ; .call VRAM_DMA_TRANSFER 0000, screen_base, 1780
     ; .call VRAM_DMA_TRANSFER 0000, bg1_tiles, BG1_TILES_SIZE
     ; .call VRAM_DMA_TRANSFER 2800, bg1_buffer, BG1_BUFFER_SIZE
     ; jsr @TransferOamBuffer ; should relocate this to RAM as well

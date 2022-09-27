@@ -34,6 +34,8 @@ InitGSU_ROM:
     stz ROMBR
 
     lda #08 ; screen base register = 70:0000 + N * 0x400
+    ; can use double buffering by switching scbr on two successive frame ?
+    ; double buffering in VRAM seems to be the norm when looking at starfox
     sta SCBR    ; = 70:2000
 
     ; nil nil HT1 RON RAN HT0 MD1 MD0
@@ -72,6 +74,15 @@ MainEntry:
 
     ldx #@GSU_Plot_line
     jsl !CallGSUFunction
+
+    ; ---- Release Forced Blank
+    .call VRAM_DMA_TRANSFER 0000, screen_base, 6000
+    lda #0f             ; release forced blanking, set screen to full brightness
+    sta INIDISP
+
+    lda #81             ; enable NMI, turn on automatic joypad polling
+    sta NMITIMEN
+    cli
 MainLoop:
     jsr @WaitNextVBlank
 

@@ -21,7 +21,3 @@ TransferOamBuffer:
     lda #01
     sta MDMAEN
     rts
-
-TransferBG1Buffer:
-    .call VRAM_DMA_TRANSFER 2800, bg1_buffer, BG1_BUFFER_SIZE
-    rts
