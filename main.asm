@@ -33,8 +33,8 @@ InitGSU_ROM:
     stz RAMBR
     stz ROMBR
 
-    lda #0a ; screen base register = 70:0000 + N * 0x400
-    sta SCBR    ; = 70:2800
+    lda #08 ; screen base register = 70:0000 + N * 0x400
+    sta SCBR    ; = 70:2000
 
     ; nil nil HT1 RON RAN HT0 MD1 MD0
     ; 0   0   1   1   1   0   0   1  ; (MD 0b01) => 16 colors, (HT 0b10) => y=192
@@ -46,7 +46,10 @@ InitGSU_ROM:
     lda #01
     sta CLSR ; clock select register
 
-    ldx #0000
+    rtl
+InitGSU_ROM_end:
+
+CallGSUFunction_ROM:
     stx R15L
 
 wait_for_gsu:
@@ -55,11 +58,17 @@ wait_for_gsu:
     bne @wait_for_gsu
 
     rtl
-InitGSU_ROM_end:
+CallGSUFunction_ROM_end:
 
 
 MainEntry:
     jsl !InitGSU
+
+    ldx #@GSU_entry
+    jsl !CallGSUFunction
+
+    ldx #@GSU_clear_buffer
+    jsl !CallGSUFunction
 MainLoop:
     jsr @WaitNextVBlank
 

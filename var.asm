@@ -43,3 +43,5 @@ FastIRQ: .rb {FastIRQ_ROM_end-FastIRQ_ROM}
 FastIRQ_end:
 InitGSU: .rb {InitGSU_ROM_end-InitGSU_ROM}
 InitGSU_end:
+CallGSUFunction: .rb {CallGSUFunction_ROM_end-CallGSUFunction_ROM}
+CallGSUFunction_end:

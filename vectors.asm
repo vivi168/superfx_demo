@@ -25,22 +25,15 @@ FastReset:
 
     .call RESET_OFFSET BG1HOFS, BG1VOFS
     .call RESET_OFFSET BG2HOFS, BG2VOFS
-    .call RESET_OFFSET BG3HOFS, BG3VOFS
-
-    lda #10
-    sta BG12NBA         ; BG1 tiles @ VRAM[0000], BG2 tiles @ VRAM[2000]
-
-    lda #02
-    sta BG34NBA         ; BG3 tiles @ VRAM[4000]
-
-    lda #28
-    sta BG1SC           ; BG1 MAP @ VRAM[5000]
 
     lda #30
-    sta BG2SC           ; BG2 MAP @ VRAM[6000]
+    sta BG12NBA         ; BG1 tiles @ VRAM[0000], BG2 tiles @ VRAM[6000]
 
-    lda #34
-    sta BG3SC           ; BG3 MAP @ VRAM[6800]
+    lda #58
+    sta BG1SC           ; BG1 MAP @ VRAM[b000]
+
+    lda #60
+    sta BG2SC           ; BG2 MAP @ VRAM[c000]
 
     lda #13             ; enable BG12 + sprites (0b10011)
     sta TM
@@ -53,6 +46,7 @@ FastReset:
     .call WRAM_DMA_TRANSFER 01, @FastNmi, FastNmi_ROM, {FastNmi_end-FastNmi}w
     .call WRAM_DMA_TRANSFER 01, @FastIRQ, FastIRQ_ROM, {FastIRQ_end-FastIRQ}w
     .call WRAM_DMA_TRANSFER 01, @InitGSU, InitGSU_ROM, {InitGSU_end-InitGSU}w
+    .call WRAM_DMA_TRANSFER 01, @CallGSUFunction, CallGSUFunction_ROM, {CallGSUFunction_end-CallGSUFunction}w
 
     ldx @NmiVector
     stx @nmi_dummy_jump
@@ -70,10 +64,11 @@ FastReset:
 ;  ---- DMA Transfers
 
     .call VRAM_DMA_TRANSFER 0000, bg1_tiles, BG1_TILES_SIZE
-    .call VRAM_DMA_TRANSFER 1000, bg2_tiles, BG2_TILES_SIZE           ; VRAM[0x2000] (word step)
+    .call VRAM_DMA_TRANSFER 3000, bg2_tiles, BG2_TILES_SIZE           ; VRAM[0x2000] (word step)
 
-    .call VRAM_DMA_TRANSFER 2800, bg1_buffer, BG1_BUFFER_SIZE         ; VRAM[0x5000] (word step)
-    .call VRAM_DMA_TRANSFER 3000, bg2_map, BG2_MAP_SIZE               ; VRAM[0x6000] (word step)
+    ; should design a tilemap corresponding to tiles drawn by super FX
+    .call VRAM_DMA_TRANSFER 5800, bg1_buffer, BG1_BUFFER_SIZE         ; VRAM[0xb000] (word step)
+    .call VRAM_DMA_TRANSFER 6000, bg2_map, BG2_MAP_SIZE               ; VRAM[0xc000] (word step)
 
     .call CGRAM_DMA_TRANSFER 00, bg1_pal, 80
 
@@ -121,7 +116,9 @@ FastNmi_ROM:
     lda @horizontal_offset+1
     sta BG1HOFS
 
-    .call VRAM_DMA_TRANSFER 2800, bg1_buffer, BG1_BUFFER_SIZE
+    ; copy char data from 70:2000 to bg1_tile tiles VRAM[0000]
+    ; .call VRAM_DMA_TRANSFER 0000, bg1_tiles, BG1_TILES_SIZE
+    ; .call VRAM_DMA_TRANSFER 2800, bg1_buffer, BG1_BUFFER_SIZE
     ; jsr @TransferOamBuffer ; should relocate this to RAM as well
 
     ; jsr @ReadJoyPad1 ; should relocate this to RAM as well
