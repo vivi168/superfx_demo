@@ -18,6 +18,12 @@ entry:
     getb ; movb Rd,[romb:r14]    ;hi=zero-expanded ; need ROM access
     ;;
 
+
+    iwt r1,#1234
+    iwt r0,#0000
+    from r1
+    stw (r0)
+
     ibt r0,#00 ; 000_00001
     cmode
 

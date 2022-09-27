@@ -11,13 +11,13 @@
 ; game title "SUPER FX DEMO        "
     .db 53,55,50,45,52,20,46,58,20,44,45,4d,4f,20,20,20,20,20,20,20,20
 ; 0xffd5: map mode
-    .db 30
+    .db 20
 ; 0xffd6: cartridge type
-    .db 13 ; starfox is 13 ?
+    .db 14 ; starfox is 13 ?
 ; 0xffd7: ROM size
     .db 09
 ; 0xffd8: RAM size
-    .db 01
+    .db 05
 ; 0xffd9: destination code
     .db 00
 ; 0xffda: fixed value

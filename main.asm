@@ -27,8 +27,14 @@ InitGSU_ROM:
     lda #02 ; set pbr to bank 02 (GSU ROM)
     sta PBR ; Program bank register
 
+    lda #04
+    sta VCR
+
+    stz RAMBR
+    stz ROMBR
+
     lda #0a ; screen base register = 70:0000 + N * 0x400
-    sta SCBR    ; = 70:2000
+    sta SCBR    ; = 70:2800
 
     ; nil nil HT1 RON RAN HT0 MD1 MD0
     ; 0   0   1   1   1   0   0   1  ; (MD 0b01) => 16 colors, (HT 0b10) => y=192

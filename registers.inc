@@ -217,10 +217,13 @@
 .define SFRL 3030
 .define SFRH 3031
 .define PBR  3034
+.define ROMBR 3036
 .define CFGR 3037
 .define SCBR 3038
 .define CLSR 3039
 .define SCMR 303A
+.define VCR  303B
+.define RAMBR 303C
 
 .define R15L 301E
 .define R15H 301F
