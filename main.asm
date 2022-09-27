@@ -76,7 +76,7 @@ MainEntry:
     jsl !CallGSUFunction
 
     ; ---- Release Forced Blank
-    .call VRAM_DMA_TRANSFER 0000, screen_base, 6000
+    .call VRAM_DMA_TRANSFER 0000, screen_base, BG1_SCBR_SIZE
     lda #0f             ; release forced blanking, set screen to full brightness
     sta INIDISP
 

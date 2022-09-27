@@ -15,7 +15,7 @@
 ; 0xffd6: cartridge type
     .db 14 ; starfox is 13 ?
 ; 0xffd7: ROM size
-    .db 09
+    .db 0a
 ; 0xffd8: RAM size
     .db 05
 ; 0xffd9: destination code

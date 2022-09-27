@@ -1,5 +1,7 @@
 #!/bin/bash
 
 ruby -I../SNES_Utils/lib ../SNES_Utils/bin/vas -f main.asm -o superfx_demo.sfc
+truncate -s 1024K superfx_demo.sfc
 
 cp superfx_demo.sfc /mnt/c/Users/vbihl/Documents/SNES/
+
