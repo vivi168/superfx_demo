@@ -89,9 +89,15 @@ ClearRegisters:
     lda #01
     sta 420d
 
+    ; ---- GSU
+    .call M16
+    stz R00L
+    stz R01L
+    stz R02L
+    stz R03L
     ; ---- custom registers
 
-    .call M16
+    ; .call M16
     stz @joy1_raw
     stz @joy1_press
     stz @joy1_held

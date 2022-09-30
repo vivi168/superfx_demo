@@ -225,5 +225,14 @@
 .define VCR  303B
 .define RAMBR 303C
 
+.define R00L 3000
+.define R00H 3001
+.define R01L 3002
+.define R01H 3003
+.define R02L 3004
+.define R02H 3005
+.define R03L 3006
+.define R03H 3007
+; ...
 .define R15L 301E
 .define R15H 301F

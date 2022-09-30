@@ -1,14 +1,41 @@
 .org 020000
 .base 10000
 
-
 .superfx
+
+.macro SWAP reg1, reg2
+    with %reg1
+    xor %reg2
+
+    with %reg2
+    xor %reg1
+
+    with %reg1
+    xor %reg2
+.endm
+
+.macro ABS reg1
+    from %reg1
+    not
+    bge @negative_%MACRO_ID
+    move %reg1,r0
+positive_%MACRO_ID:
+.endm
 
 GSU_entry:
     ; iwt r0,#1234
     ; iwt r1,#4567
     ; add r1
     ; nop
+
+    iwt r1,#1234
+    iwt r2,#4567
+    .call SWAP r1, r2
+
+    iwt r1,#0123
+    .call ABS r1
+    iwt r1,#f123
+    .call ABS r1
 
     ;; test ROM reading
     ibt r1,#00
@@ -42,34 +69,5 @@ GSU_clear_buffer:
     nop
 
 
-; todo -> argument
-; x0, y0 -> length
-; color
-GSU_Plot_line:
-    ;; test plotting
-
-    ; first set CMODE
-    iwt r0,#01 ; 000_00001
-    cmode
-
-    ; then set COLOR (color, getc)
-    ibt r0,#0b
-    color
-
-    ; then set x, y (r1, r2)
-    ; then plot
-
-    iwt r1,#0
-    iwt r2,#4
-
-    iwt r12,#e0
-
-    cache
-    move r13,r15
-    loop
-    plot
-
-    rpix
-
-    stop
-    nop
+.include draw_line.asm
+; .include draw_triangle.asm

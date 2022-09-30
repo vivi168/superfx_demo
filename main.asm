@@ -72,15 +72,27 @@ MainEntry:
     ldx #@GSU_clear_buffer
     jsl !CallGSUFunction
 
-    ldx #@GSU_Plot_line
+    ; draw_hline(96, 213, 184)
+    ldx #0060 ; x0=96
+    stx R01L
+    ldx #00d5 ; x1=213
+    stx R03L
+    ldx #00b8 ; y=184
+    stx R02L
+
+    ldx #@GSU_draw_hline
     jsl !CallGSUFunction
 
     ; ---- Release Forced Blank
-    .call VRAM_DMA_TRANSFER 0000, screen_base, BG1_SCBR_SIZE
+    .call VRAM_DMA_TRANSFER 0000, screen_base, 5400; BG1_SCBR_SIZE
+    ; .call VRAM_DMA_TRANSFER 0000, screen_base, 5400 ; 5400 is enough to copy first 672 tiles coposing the center screen
     lda #0f             ; release forced blanking, set screen to full brightness
     sta INIDISP
 
-    lda #81             ; enable NMI, turn on automatic joypad polling
+    lda #cf    ; trigger IRQ on line 207
+    sta VTIMEL
+
+    lda #a1             ; enable VIRQ, NMI, turn on automatic joypad polling
     sta NMITIMEN
     cli
 MainLoop:

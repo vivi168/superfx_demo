@@ -17,11 +17,16 @@ for i in range(HEIGHT):
 
 data = np.array(raw_data).reshape(-1, WIDTH)
 
-edge_coordinates = (2,2)
+
+x = 2
+y = 2
+edge_coordinates = (y,x)
 slicer = tuple(slice(edge, edge+i) for edge, i in zip(edge_coordinates, data.shape))
 full_screen[slicer] = data
 
 print(full_screen)
+print(full_screen.shape)
+print(data.shape)
 
 import struct
 
@@ -29,7 +34,7 @@ flattened = list(full_screen.ravel().astype(int))
 
 tilemap = []
 for i in flattened:
-  print(i)
+  # print(i)
   lsb, msb = struct.pack('<H', i)
 
   tilemap.append(lsb)

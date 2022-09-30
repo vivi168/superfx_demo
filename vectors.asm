@@ -140,6 +140,27 @@ FastIRQ_ROM:
     lda SFRH
     bit #80
     bne @return_from_gsu
+; regular irq
+
+    lda TIMEUP
+
+    ; on reset -> copy full frame to buffer 1
+
+    ; 4 steps
+    ; frame 1 & 2 : show buffer 1 (if (frame & 0b11) & 0b10 == 0b0)
+    ; 00, 01
+    ; frame 1 -> copy  first half to buffer 2L
+    ; frame 2 -> copy second half to buffer 2H
+
+    ; frame 3 & 4 : show buffer 2 (if (frame & 0b11) & 0b10 == 0b10)
+    ; 10, 11
+    ; frame 3 -> copy  first half to buffer 1L
+    ; frame 4 -> copy second half to buffer 1H
+
+    ; screen_base_1
+    ; screen_base_2
+
+    .call VRAM_DMA_TRANSFER 0000, screen_base, 2a00
 
     bra @exit_irq
 
