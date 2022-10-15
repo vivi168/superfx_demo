@@ -17,7 +17,7 @@
 .macro ABS reg1
     from %reg1
     not
-    bge @negative_%MACRO_ID
+    bge @positive_%MACRO_ID
     move %reg1,r0
 positive_%MACRO_ID:
 .endm
