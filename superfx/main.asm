@@ -23,11 +23,7 @@ positive_%MACRO_ID:
 .endm
 
 GSU_entry:
-    ; iwt r0,#1234
-    ; iwt r1,#4567
-    ; add r1
-    ; nop
-
+    ;; test MACROS
     iwt r1,#1234
     iwt r2,#4567
     .call SWAP r1, r2

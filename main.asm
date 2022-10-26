@@ -79,6 +79,8 @@ MainEntry:
     stx R03L
     ldx #00b8 ; y=184
     stx R02L
+    ldx #000b
+    stx R00L
 
     ldx #@GSU_draw_hline
     jsl !CallGSUFunction
