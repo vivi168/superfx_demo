@@ -96,6 +96,42 @@ MainEntry:
     ldx #@GSU_draw_hline
     jsl !CallGSUFunction
 
+; ---- ***
+    ; r0=color
+    ldx #0007
+    stx R00L
+    ; r1=x0
+    ldx #0060
+    stx R01L
+    ; r3=x2
+    ldx #0080
+    stx R03L
+    ; r2=y0
+    ldx #0058
+    stx R02L
+    ; r4=y1
+    stx R04L
+    ldx #@GSU_draw_line
+    jsl !CallGSUFunction
+
+    ; r0=color
+    ldx #0003
+    stx R00L
+    ; r1=x0
+    ldx #0080
+    stx R01L
+    ; r3=x2
+    ldx #00a0
+    stx R03L
+    ; r2=y0
+    ldx #0058
+    stx R02L
+    ; r4=y1
+    stx R04L
+    ldx #@GSU_draw_line
+    jsl !CallGSUFunction
+; ---- ***
+
     ; ---- Release Forced Blank
     .call VRAM_DMA_TRANSFER 0000, screen_base, 5400; BG1_SCBR_SIZE
     ; .call VRAM_DMA_TRANSFER 0000, screen_base, 5400 ; 5400 is enough to copy first 672 tiles coposing the center screen

@@ -1,6 +1,13 @@
 .org 700000
 
-issou: .rb 1
+; for draw_line
+dx: .rb 2
+dy: .rb 2
+derror: .rb 2
+error: .rb 2
+ny: .rb 2
+yincr: .rb 2
+
 
 .org 702000
 

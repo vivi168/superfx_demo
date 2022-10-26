@@ -24,6 +24,20 @@ GSU_draw_hline:
     nop
 
 ; void draw_line(int x0, int y0, int x1, int y1);
+; r0=color
+; r1=x0
+; r3=x2
+; r2=y0
+; r4=y1
 GSU_draw_line:
+    from r2
+    cmp r4
+    bne @continue_draw_line
+
+    iwt r15,#@GSU_draw_hline
+    nop
+
+continue_draw_line:
+
     stop
     nop
