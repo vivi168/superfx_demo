@@ -18,6 +18,7 @@ vblank_disable:           .rb 1
 horizontal_offset:        .rb 2
 
 next_rand:                .rb 2
+scmr_mirror:              .rb 1
 
 .org 7e0108
 

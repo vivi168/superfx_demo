@@ -39,10 +39,9 @@ InitGSU_ROM:
     sta SCBR    ; = 70:2000
 
     ; nil nil HT1 RON RAN HT0 MD1 MD0
-    ; 0   0   1   1   1   0   0   1  ; (MD 0b01) => 16 colors, (HT 0b10) => y=192
-    lda #39 ; w/ RON
-    ; lda #29 ; w/o RON
-    sta SCMR
+    ; 0   0   1   0   0   0   0   1  ; (MD 0b01) => 16 colors, (HT 0b10) => y=192
+    lda #21 ; w/ RON
+    sta @scmr_mirror
 
     stz CFGR ; config, enable IRQ on STOP
     lda #01
@@ -52,12 +51,24 @@ InitGSU_ROM:
 InitGSU_ROM_end:
 
 CallGSUFunction_ROM:
+    ; give GSU access to ROM/RAM
+    lda @scmr_mirror
+    ora #18
+    sta SCMR
+    sta @scmr_mirror
+
     stx R15L
 
 wait_for_gsu:
     lda SFRL
     bit #20
     bne @wait_for_gsu
+
+    ; give back SNES access to ROM/RAM
+    lda @scmr_mirror
+    eor #18
+    sta SCMR
+    sta @scmr_mirror
 
     rtl
 CallGSUFunction_ROM_end:
