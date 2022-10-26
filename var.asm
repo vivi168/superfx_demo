@@ -7,6 +7,11 @@ derror: .rb 2
 error: .rb 2
 ny: .rb 2
 yincr: .rb 2
+steep: .rb 2
+x0: .rb 2
+x1: .rb 2
+y0: .rb 2
+y1: .rb 2
 
 
 .org 702000

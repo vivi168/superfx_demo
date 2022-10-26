@@ -15,10 +15,12 @@
 .endm
 
 .macro ABS reg1
-    from %reg1
+    with %reg1
     not
-    bge @positive_%MACRO_ID
-    move %reg1,r0
+    bpl @positive_%MACRO_ID
+    nop
+    with %reg1
+    not
 positive_%MACRO_ID:
 .endm
 
@@ -28,10 +30,10 @@ GSU_entry:
     iwt r2,#4567
     .call SWAP r1, r2
 
-    iwt r1,#0123
-    .call ABS r1
-    iwt r1,#f123
-    .call ABS r1
+    ; iwt r1,#0123
+    ; .call ABS r1
+    ; iwt r1,#f123
+    ; .call ABS r1
 
     ;; test ROM reading
     ibt r1,#00

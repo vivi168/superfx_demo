@@ -77,8 +77,8 @@ CallGSUFunction_ROM_end:
 MainEntry:
     jsl !InitGSU
 
-    ldx #@GSU_entry
-    jsl !CallGSUFunction
+    ; ldx #@GSU_entry
+    ; jsl !CallGSUFunction
 
     ldx #@GSU_clear_buffer
     jsl !CallGSUFunction
@@ -110,6 +110,7 @@ MainEntry:
     ldx #0058
     stx R02L
     ; r4=y1
+    ldx #00b8
     stx R04L
     ldx #@GSU_draw_line
     jsl !CallGSUFunction
