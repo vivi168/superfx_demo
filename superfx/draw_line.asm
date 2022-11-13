@@ -41,10 +41,8 @@ GSU_draw_line:
 
 continue_draw_line:
     ; steep = 0
-    iwt r5,#@steep
-    iwt r6,#0
-    from r6
-    stw (r5)
+    iwt r5,#0
+    sm (@steep),r5
 
     ; r5 = x0(r1) - x1(r3)
     move r5,r1
@@ -68,10 +66,8 @@ continue_draw_line:
     .call SWAP r3,r4 ; -> swap(x1, y1)
 
     ; steep = 1
-    iwt r5,#@steep
-    iwt r6,#1
-    from r6
-    stw (r5)
+    iwt r5,#1
+    sm (@steep),r5
 
 continue_draw_line2:
 
