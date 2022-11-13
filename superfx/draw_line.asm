@@ -50,15 +50,15 @@ continue_draw_line:
     sub r3
     .call ABS r5
 
-    ; r6 = y0(r2) - y1(r4)
-    move r6,r2
-    with r6
+    ; r9 = y0(r2) - y1(r4)
+    move r9,r2
+    with r9
     sub r4
-    .call ABS r6
+    .call ABS r9
 
     from r5
-    cmp r6
-    bge @continue_draw_line2 ; skip if r5(abs(x0 - x1)) > r6(abs(y0 - y1))
+    cmp r9
+    bge @continue_draw_line2 ; skip if r5(abs(x0 - x1)) > r9(abs(y0 - y1))
     nop
 
     ; if (abs(x0 - x1) < abs(y0 - y1))
