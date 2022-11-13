@@ -24,6 +24,20 @@
 positive_%MACRO_ID:
 .endm
 
+.macro PUSH reg
+    from %reg
+    stw (r10)
+    dec r10
+    dec r10
+.endm
+
+.macro PULL reg
+    inc r10
+    inc r10
+    to %reg
+    ldw (r10)
+.endm
+
 GSU_entry:
     ;; test MACROS
     iwt r1,#1234

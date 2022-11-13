@@ -30,12 +30,27 @@ GSU_draw_hline:
 ; r2=y0
 ; r4=y1
 GSU_draw_line:
+    nop
+    nop
+    nop
+
+    .call PUSH r0
+    .call PUSH r1
+
+    iwt r0,#abcd
+    iwt r1,#cdef
+
+    .call PULL r1
+    .call PULL r0
+
+
     ; if y0(r2) == y1(r4) -> draw_hline
     from r2
     cmp r4
     bne @continue_draw_line
     nop
 
+    ; should branch to a function that returns
     iwt r15,#@GSU_draw_hline
     nop
 

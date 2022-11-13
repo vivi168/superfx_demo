@@ -47,6 +47,10 @@ InitGSU_ROM:
     lda #01
     sta CLSR ; clock select register
 
+    ; reset stack pointer
+    ldx #1fff
+    stx R10L
+
     rtl
 InitGSU_ROM_end:
 

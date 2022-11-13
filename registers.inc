@@ -236,5 +236,7 @@
 .define R04L 3008
 .define R04H 3009
 ; ...
+.define R10L 3014
+.define R10H 3015
 .define R15L 301E
 .define R15H 301F
