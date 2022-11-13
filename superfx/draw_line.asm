@@ -23,6 +23,19 @@ GSU_draw_hline:
     stop
     nop
 
+Draw_hline:
+    .call PUSH r0
+    .call PUSH r1
+
+    iwt r0,#abcd
+    iwt r1,#cdef
+
+    .call PULL r1
+    .call PULL r0
+
+    .call RET
+
+
 ; void draw_line(int x0, int y0, int x1, int y1);
 ; r0=color
 ; r1=x0
@@ -34,14 +47,7 @@ GSU_draw_line:
     nop
     nop
 
-    .call PUSH r0
-    .call PUSH r1
-
-    iwt r0,#abcd
-    iwt r1,#cdef
-
-    .call PULL r1
-    .call PULL r0
+    .call CALL @Draw_hline
 
 
     ; if y0(r2) == y1(r4) -> draw_hline

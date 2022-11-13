@@ -38,6 +38,17 @@ positive_%MACRO_ID:
     ldw (r10)
 .endm
 
+.macro CALL func
+    link #4
+    iwt r15,#%func
+    nop
+.endm
+
+.macro RET
+    jmp r11
+    nop
+.endm
+
 GSU_entry:
     ;; test MACROS
     iwt r1,#1234
