@@ -105,18 +105,42 @@ continue_draw_line2:
 
 continue_draw_line3:
 
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    ; dx = x1 - x0;
-    ; dy = y1 - y0;
+    ; dx = x1(r3) - x0(r1);
+    move r5,r3
+    with r5
+    sub r1
+    .call PUSH r5 ; sp
+
+    ; dy = y1(r4) - y0(r2);
+    move r5,r4
+    with r5
+    sub r2
+
     ; derror = abs(dy) * 2;
+    .call ABS r5
+    with r5
+    add r5
+    .call PUSH r5 ; sp + 2
+
     ; error = 0;
+    iwt r5,#0
+    .call PUSH r5 ; sp + 4
+
     ; y = y0;
+    .call PUSH r2 ; sp + 6
+
     ; yincr = (y1 > y0 ? 1 : -1);
+    from r4
+    cmp r2
+    blt @yincr_neg
+    iwt r5,#1
+    bra @yincr_pos
+yincr_neg:
+    iwt r5,#ffff ; -1
+yincr_pos:
+    .call PUSH r5 ; sp + 8
+
+
 
     stop
     nop

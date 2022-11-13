@@ -43,7 +43,8 @@ InitGSU_ROM:
     lda #21 ; w/ RON
     sta @scmr_mirror
 
-    stz CFGR ; config, enable IRQ on STOP
+    lda #a0
+    sta CFGR ; config, enable IRQ on STOP
     lda #01
     sta CLSR ; clock select register
 
