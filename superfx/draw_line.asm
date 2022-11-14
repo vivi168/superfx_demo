@@ -12,6 +12,7 @@ GSU_draw_hline:
     to r12
     from r3
     sub r1
+    inc r12
 
     cache
     move r13,r15
@@ -43,12 +44,7 @@ Draw_hline:
 ; r2=y0
 ; r4=y1
 GSU_draw_line:
-    nop
-    nop
-    nop
-
-    .call CALL @Draw_hline
-
+    .call PUSH r0 ; save color to spare a register
 
     ; if y0(r2) == y1(r4) -> draw_hline
     from r2
@@ -62,8 +58,7 @@ GSU_draw_line:
 
 continue_draw_line:
     ; steep = 0
-    iwt r5,#0
-    sm (@steep),r5
+    iwt r7,#0
 
     ; r5 = x0(r1) - x1(r3)
     move r5,r1
@@ -87,8 +82,7 @@ continue_draw_line:
     .call SWAP r3,r4 ; -> swap(x1, y1)
 
     ; steep = 1
-    iwt r5,#1
-    sm (@steep),r5
+    iwt r7,#1
 
 continue_draw_line2:
 
@@ -106,41 +100,71 @@ continue_draw_line2:
 continue_draw_line3:
 
     ; dx = x1(r3) - x0(r1);
-    move r5,r3
-    with r5
+    move r9,r3
+    with r9
     sub r1
-    .call PUSH r5 ; sp
 
     ; dy = y1(r4) - y0(r2);
     move r5,r4
     with r5
     sub r2
-
     ; derror = abs(dy) * 2;
     .call ABS r5
     with r5
     add r5
-    .call PUSH r5 ; sp + 2
 
     ; error = 0;
-    iwt r5,#0
-    .call PUSH r5 ; sp + 4
-
-    ; y = y0;
-    .call PUSH r2 ; sp + 6
+    iwt r6,#0
 
     ; yincr = (y1 > y0 ? 1 : -1);
     from r4
     cmp r2
     blt @yincr_neg
-    iwt r5,#1
+    nop
+    iwt r8,#1
     bra @yincr_pos
+    nop
 yincr_neg:
-    iwt r5,#ffff ; -1
+    iwt r8,#ffff ; -1
 yincr_pos:
-    .call PUSH r5 ; sp + 8
 
+    iwt r0,#0
 
+    from r7
+    cmp r0
+    beq @L8
+    nop
 
+    from r8
+    cmp r0
+    blt @L9
+    nop
+
+    .call SWAP r1, r2
+    bra @L10
+    nop
+
+L9:
+    move r1,r4
+    move r2,r3
+L10:
+
+    .call PULL r0
+    .call CALL @LOOP_1
+    bra @L1
+    nop
+L8:
+    .call PULL r0
+    .call CALL @LOOP_2
+L1:
     stop
     nop
+
+
+LOOP_1:
+    ; TODO
+    .call RET
+
+LOOP_2:
+    ; TODO
+    .call RET

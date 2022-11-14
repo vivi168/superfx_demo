@@ -102,6 +102,7 @@ MainEntry:
     jsl !CallGSUFunction
 
 ; ---- ***
+    ; LOOP_1A
     ; r0=color
     ldx #0007
     stx R00L
@@ -120,19 +121,40 @@ MainEntry:
     ldx #@GSU_draw_line
     jsl !CallGSUFunction
 
+    ; LOOP_1B
     ; r0=color
-    ldx #0003
+    ldx #0007
     stx R00L
     ; r1=x0
-    ldx #0080
+    ldx #0007
     stx R01L
     ; r3=x2
-    ldx #00a0
+    ldx #0008
+    stx R03L
+    ; r2=y0
+    ldx #00b8
+    stx R02L
+    ; r4=y1
+    ldx #0058
+    stx R04L
+    ldx #@GSU_draw_line
+    jsl !CallGSUFunction
+
+    ; LOOP_2
+    ; r0=color
+    ldx #0007
+    stx R00L
+    ; r1=x0
+    ldx #0007
+    stx R01L
+    ; r3=x2
+    ldx #0080
     stx R03L
     ; r2=y0
     ldx #0058
     stx R02L
     ; r4=y1
+    ldx #00b8
     stx R04L
     ldx #@GSU_draw_line
     jsl !CallGSUFunction
