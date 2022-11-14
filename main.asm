@@ -107,16 +107,16 @@ MainEntry:
     ldx #C_MAGENTA
     stx R00L
     ; r1=x0
-    ldx #0060
+    ldx #002c
     stx R01L
     ; r2=y0
-    ldx #0058
+    ldx #0080
     stx R02L
     ; r3=x1
-    ldx #0080
+    ldx #0068
     stx R03L
     ; r4=y1
-    ldx #00b8
+    ldx #001c
     stx R04L
     ldx #@GSU_draw_line
     jsl !CallGSUFunction
@@ -126,16 +126,16 @@ MainEntry:
     ldx #C_YELLOW
     stx R00L
     ; r1=x0
-    ldx #0007
+    ldx #0068
     stx R01L
     ; r2=y0
-    ldx #00b8
+    ldx #001c
     stx R02L
     ; r3=x1
-    ldx #0008
+    ldx #009c
     stx R03L
     ; r4=y1
-    ldx #0058
+    ldx #0057
     stx R04L
     ldx #@GSU_draw_line
     jsl !CallGSUFunction
@@ -145,16 +145,16 @@ MainEntry:
     ldx #C_BLUE
     stx R00L
     ; r1=x0
-    ldx #0007
+    ldx #009c
     stx R01L
     ; r2=y0
-    ldx #0058
+    ldx #0057
     stx R02L
     ; r3=x1
-    ldx #0080
+    ldx #002c
     stx R03L
     ; r4=y1
-    ldx #00b8
+    ldx #0080
     stx R04L
     ldx #@GSU_draw_line
     jsl !CallGSUFunction

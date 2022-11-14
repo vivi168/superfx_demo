@@ -169,8 +169,74 @@ L1:
 
 LOOP_1:
     ; TODO
+    color
+
+    cache
+    move r13,r15
+
+    plot
+
+    with r2
+    add r8
+
+    with r6
+    add r5
+
+    from r6
+    cmp r9
+    blt @decr1
+    nop
+    beq @decr1
+    nop
+
+    with r6
+    sub r9
+    with r6
+    sub r9
+    bra @continueloop1
+    nop
+
+decr1:
+    dec r1
+
+continueloop1:
+
+    loop
+    nop
+
+
     .call RET
 
 LOOP_2:
+    color
+
+    cache
+    move r13,r15
+
+    plot
+
+    with r6
+    add r5
+
+    from r6
+    cmp r9
+    blt @continueloop2
+    nop
+    beq @continueloop2
+    nop
+
+    with r2
+    add r8
+
+    with r6
+    sub r9
+    with r6
+    sub r9
+
+continueloop2:
+
+    loop
+    nop
+
     ; TODO
     .call RET
