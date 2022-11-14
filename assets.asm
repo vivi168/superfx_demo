@@ -9,3 +9,5 @@ bg1_pal:       .incbin assets/bg1.pal
 bg2_pal:       .incbin assets/bg2.pal
 bg1_map:       .incbin assets/bg1.map
 bg2_map:       .incbin assets/bg2.map
+
+triangle:      .incbin assets/triangle.bin
