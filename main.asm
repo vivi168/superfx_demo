@@ -109,12 +109,12 @@ MainEntry:
     ; r1=x0
     ldx #0060
     stx R01L
-    ; r3=x2
-    ldx #0080
-    stx R03L
     ; r2=y0
     ldx #0058
     stx R02L
+    ; r3=x1
+    ldx #0080
+    stx R03L
     ; r4=y1
     ldx #00b8
     stx R04L
@@ -128,12 +128,12 @@ MainEntry:
     ; r1=x0
     ldx #0007
     stx R01L
-    ; r3=x2
-    ldx #0008
-    stx R03L
     ; r2=y0
     ldx #00b8
     stx R02L
+    ; r3=x1
+    ldx #0008
+    stx R03L
     ; r4=y1
     ldx #0058
     stx R04L
@@ -147,12 +147,12 @@ MainEntry:
     ; r1=x0
     ldx #0007
     stx R01L
-    ; r3=x2
-    ldx #0080
-    stx R03L
     ; r2=y0
     ldx #0058
     stx R02L
+    ; r3=x1
+    ldx #0080
+    stx R03L
     ; r4=y1
     ldx #00b8
     stx R04L
