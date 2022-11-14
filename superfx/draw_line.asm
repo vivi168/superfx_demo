@@ -116,6 +116,12 @@ continue_draw_line3:
     ; error = 0;
     iwt r6,#0
 
+    ; loop counter  r12 = (r3 - r1) + 1;
+    move r12,r3
+    with r12
+    sub r1
+    inc r12
+
     ; yincr = (y1 > y0 ? 1 : -1);
     from r4
     cmp r2
