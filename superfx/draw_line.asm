@@ -204,6 +204,7 @@ continueloop1:
     loop
     nop
 
+    rpix
 
     .call RET
 
@@ -237,6 +238,8 @@ continueloop2:
 
     loop
     nop
+
+    rpix
 
     ; TODO
     .call RET
