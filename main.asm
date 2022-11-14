@@ -95,7 +95,7 @@ MainEntry:
     stx R03L
     ldx #00b8 ; y=184
     stx R02L
-    ldx #000b
+    ldx #C_MAGENTA
     stx R00L
 
     ldx #@GSU_draw_hline
@@ -104,7 +104,7 @@ MainEntry:
 ; ---- ***
     ; LOOP_1A
     ; r0=color
-    ldx #0007
+    ldx #C_MAGENTA
     stx R00L
     ; r1=x0
     ldx #0060
@@ -123,7 +123,7 @@ MainEntry:
 
     ; LOOP_1B
     ; r0=color
-    ldx #0007
+    ldx #C_YELLOW
     stx R00L
     ; r1=x0
     ldx #0007
@@ -142,7 +142,7 @@ MainEntry:
 
     ; LOOP_2
     ; r0=color
-    ldx #0007
+    ldx #C_BLUE
     stx R00L
     ; r1=x0
     ldx #0007
