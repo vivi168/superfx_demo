@@ -15,14 +15,11 @@
 .endm
 
 .macro ABS reg1
+    bpl @positive_%MACRO_ID
+    nop
     with %reg1
     not
     inc %reg1
-    bpl @positive_%MACRO_ID
-    nop
-    dec %reg1
-    with %reg1
-    not
 positive_%MACRO_ID:
 .endm
 
