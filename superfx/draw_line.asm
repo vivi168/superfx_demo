@@ -23,12 +23,11 @@ Draw_hline:
 
     .call RET
 
-
 ; void draw_line(int x0, int y0, int x1, int y1);
 ; r0=color
 ; r1=x0
-; r3=x1
 ; r2=y0
+; r3=x1
 ; r4=y1
 GSU_draw_line:
     ; if y0(r2) == y1(r4) -> draw_hline
@@ -160,7 +159,6 @@ L1:
 
 
 LOOP_1:
-    ; TODO
     color
 
     cache
@@ -233,7 +231,6 @@ continueloop2:
 
     rpix
 
-    ; TODO
     .call RET
 
 ; r0 -> color
