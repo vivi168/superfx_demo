@@ -5,7 +5,7 @@
 ; r1=x0
 ; r3=x2
 ; r2=y
-GSU_draw_hline:
+Draw_hline:
     color ; color in r0
 
     ; sub => Rd = Rs - Rn
@@ -21,19 +21,6 @@ GSU_draw_hline:
 
     rpix
 
-    stop
-    nop
-
-Draw_hline:
-    .call PUSH r0
-    .call PUSH r1
-
-    iwt r0,#abcd
-    iwt r1,#cdef
-
-    .call PULL r1
-    .call PULL r0
-
     .call RET
 
 
@@ -44,8 +31,6 @@ Draw_hline:
 ; r2=y0
 ; r4=y1
 GSU_draw_line:
-    .call PUSH r0 ; save color to spare a register
-
     ; if y0(r2) == y1(r4) -> draw_hline
     from r2
     cmp r4
@@ -53,10 +38,15 @@ GSU_draw_line:
     nop
 
     ; should branch to a function that returns
-    iwt r15,#@GSU_draw_hline
+    .call CALL @Draw_hline
+    nop
+    nop
+    stop
     nop
 
 continue_draw_line:
+    .call PUSH r0 ; save color to spare a register
+
     ; steep = 0
     iwt r7,#0
 
@@ -163,6 +153,8 @@ L8:
     .call PULL r0
     .call CALL @LOOP_2
 L1:
+    nop
+    nop
     stop
     nop
 
@@ -243,3 +235,14 @@ continueloop2:
 
     ; TODO
     .call RET
+
+; r0 -> color
+; r1 -> address of triangle
+GSU_draw_triangle:
+
+    ; TODO
+
+    nop
+    nop
+    stop
+    nop

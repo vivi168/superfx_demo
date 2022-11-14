@@ -95,10 +95,12 @@ MainEntry:
     stx R03L
     ldx #00b8 ; y=184
     stx R02L
+    ldx #00b8 ; y=184
+    stx R04L
     ldx #C_MAGENTA
     stx R00L
 
-    ldx #@GSU_draw_hline
+    ldx #@GSU_draw_line
     jsl !CallGSUFunction
 
 ; ---- ***
