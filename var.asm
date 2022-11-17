@@ -1,23 +1,28 @@
+; GSU
 .org 700000
 
-; for draw_line
-dx: .rb 2
-dy: .rb 2
-derror: .rb 2
-error: .rb 2
-ny: .rb 2
-yincr: .rb 2
-steep: .rb 2
-x0: .rb 2
-x1: .rb 2
-y0: .rb 2
-y1: .rb 2
+; vectors
+v0:
+v0_x: .rb 2
+v0_y: .rb 2
+v0_z: .rb 2
 
+v1:
+v1_x: .rb 2
+v1_y: .rb 2
+v1_z: .rb 2
+
+v2:
+v2_x: .rb 2
+v2_y: .rb 2
+v2_z: .rb 2
 
 .org 702000
 
 screen_base: .rb 1
 
+
+; CPU
 .org 7e0000
 
 joy1_raw:                 .rb 2

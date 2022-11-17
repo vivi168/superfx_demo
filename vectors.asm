@@ -43,6 +43,7 @@ FastReset:
     sta OBJSEL          ; oam start @VRAM[8000]
 
 ;  ---- Some initialization
+    ; TODO: faster with manual transfer ?
     .call WRAM_DMA_TRANSFER 01, @FastNmi, FastNmi_ROM, {FastNmi_end-FastNmi}w
     .call WRAM_DMA_TRANSFER 01, @FastIRQ, FastIRQ_ROM, {FastIRQ_end-FastIRQ}w
     .call WRAM_DMA_TRANSFER 01, @InitGSU, InitGSU_ROM, {InitGSU_end-InitGSU}w

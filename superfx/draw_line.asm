@@ -50,19 +50,17 @@ continue_draw_line:
     iwt r7,#0
 
     ; r5 = x0(r1) - x1(r3)
-    move r5,r1
-    with r5
+    move r0,r1
     sub r3
-    .call ABS r5
+    .call ABS r0
 
     ; r9 = y0(r2) - y1(r4)
-    move r9,r2
-    with r9
+    move r5,r2
+    with r5
     sub r4
-    .call ABS r9
+    .call ABS r5
 
-    from r5
-    cmp r9
+    cmp r5
     bge @continue_draw_line2 ; skip if r5(abs(x0 - x1)) > r9(abs(y0 - y1))
     nop
 
@@ -94,13 +92,12 @@ continue_draw_line3:
     sub r1
 
     ; dy = y1(r4) - y0(r2);
-    move r5,r4
-    with r5
+    move r0,r4
     sub r2
     ; derror = abs(dy) * 2;
-    .call ABS r5
-    with r5
-    add r5
+    .call ABS r0
+    to r5
+    add r0
 
     ; error = 0;
     iwt r6,#0
