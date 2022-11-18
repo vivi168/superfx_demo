@@ -38,6 +38,21 @@ FastReset:
     lda #13             ; enable BG12 + sprites (0b10011)
     sta TM
 
+;  ---- WINDOWING settings
+
+    lda #33
+    sta W12SEL
+    sta W34SEL
+    sta WOBJSEL
+
+    lda #10
+    sta WH0
+    lda #ef
+    sta WH1
+
+    lda #1f
+    sta TMW
+
 ;  ---- OBJ settings
     lda #62             ; sprite 16x16 small, 32x32 big
     sta OBJSEL          ; oam start @VRAM[8000]
