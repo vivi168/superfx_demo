@@ -10,4 +10,17 @@ bg2_pal:       .incbin assets/bg2.pal
 bg1_map:       .incbin assets/bg1.map
 bg2_map:       .incbin assets/bg2.map
 
+wh0_hdma:
+.db 10
+.db ff
+
+.db 60
+.db 10
+.db 60
+.db 10
+
+.db 01
+.db ff
+.db 00
+
 triangle:      .incbin assets/triangle.bin
