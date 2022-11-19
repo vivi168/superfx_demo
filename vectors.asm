@@ -123,9 +123,6 @@ FastNmi_ROM:
 
     lda RDNMI
 
-    stz MDMAEN
-    stz HDMAEN
-
     inc @frame_counter
 
     lda @horizontal_offset
@@ -140,26 +137,6 @@ FastNmi_ROM:
 
     ; jsr @TransferOamBuffer ; should relocate this to RAM as well
     ; jsr @ReadJoyPad1 ; should relocate this to RAM as well
-
-
-
-    ; ---- hdma begin
-
-    lda #^wh0_hdma
-    sta A1T3B
-    ldx #@wh0_hdma
-    stx A1T3L
-
-    lda #26
-    sta BBAD3
-
-    lda #00
-    sta DMAP3
-
-    lda #08
-    sta HDMAEN
-
-    ; ---- hdma end
 
     inc @vblank_disable
 
@@ -184,6 +161,9 @@ FastIRQ_ROM:
 
     lda TIMEUP
 
+    stz MDMAEN
+    stz HDMAEN
+
     ; on reset -> copy full frame to buffer 1
 
     ; 4 steps
@@ -200,6 +180,25 @@ FastIRQ_ROM:
     ; screen_base_1
     ; screen_base_2
 
+    ; ---- hdma begin
+
+    lda #^wh0_hdma
+    sta A1T3B
+    ldx #@wh0_hdma
+    stx A1T3L
+
+    lda #26
+    sta BBAD3
+
+    lda #00
+    sta DMAP3
+
+    lda #08
+    sta HDMAEN
+
+    ; ---- hdma end
+
+    ; enable DMA after HDMA
     .call VRAM_DMA_TRANSFER 0000, screen_base, 2a00
 
     bra @exit_irq
